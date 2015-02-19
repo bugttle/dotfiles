@@ -155,3 +155,8 @@ zstyle ':prezto:module:prompt' theme 'steeef'
 
 # Integrate with iTerm2.
 # zstyle ':prezto:module:tmux:iterm' integrate 'yes'
+
+#
+# Custom
+#
+alias diff='command diff'
