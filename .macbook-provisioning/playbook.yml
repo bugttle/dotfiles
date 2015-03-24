@@ -8,12 +8,14 @@
     homebrew_packages:
       - { name: ansible }
       - { name: git }
+      - { name: subversion }
       - { name: zsh } # install_options: disable-etcdir はデフォルトになっている
       # Programming
       - { name: go }
       - { name: node }
       - { name: sbt }
       - { name: scala }
+      - { name: typesafe-activator }
       - { name: rbenv }
       - { name: pyenv }
       - { name: ant }
@@ -33,6 +35,7 @@
     homebrew_cask_packages:
       - { name: atom }
       - { name: appcleaner }
+      - { name: crashlytics }
       - { name: clipmenu }
       - { name: firefox }
       - { name: gimp }
@@ -51,7 +54,10 @@
       #- { name: vlc } #=> download時にtimeoutしてしまう
       - { name: xtrafinder }
     app_store: # メモなので直接は処理されません
+      - 1Password
       - Alfred
+      - Android Studio
+      - Caffeine
       - Cyberduck
       - Dash
       - Evernote
@@ -64,7 +70,14 @@
       - Sunrise
     others: # メモなので直接は処理されません
       - Cocos2d-x
-      - Sourcetree # cask
+      - Dropbox # cask
+      - Feedly
+      - GlyphDesigner
+      - Kindle
+      - Line
+      - Microsoft OneNote
+      - SourceTree # cask
+      - Steam
       - Unity # cask
       - Synergy
       - Xamarin
