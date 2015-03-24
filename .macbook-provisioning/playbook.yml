@@ -1,0 +1,114 @@
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  sudo: no
+  vars:
+    homebrew_taps:
+      - caskroom/cask
+    homebrew_packages:
+      - { name: ansible }
+      - { name: git }
+      - { name: zsh } # install_options: disable-etcdir はデフォルトになっている
+      # Programming
+      - { name: go }
+      - { name: node }
+      - { name: sbt }
+      - { name: scala }
+      - { name: rbenv }
+      - { name: pyenv }
+      - { name: ant }
+      - { name: gibo }
+      # Shell
+      - { name: coreutils }
+      - { name: watch }
+      - { name: tree }
+      - { name: nkf }
+      - { name: lv }
+      - { name: ag }
+      - { name: jq }
+      - { name: peco }
+      - { name: autojump }
+      # Others
+      - { name: wakeonlan }
+    homebrew_cask_packages:
+      - { name: atom }
+      - { name: appcleaner }
+      - { name: clipmenu }
+      - { name: firefox }
+      - { name: gimp }
+      - { name: google-chrome }
+      - { name: google-japanese-ime }
+      - { name: hipchat }
+      - { name: iexplorer }
+      - { name: iterm2 }
+      - { name: intellij-idea-ce }
+      - { name: karabiner }
+      - { name: simplecap }
+      - { name: skype }
+      - { name: sourcetree }
+      - { name: texturepacker }
+      - { name: totalterminal }
+      #- { name: vlc } #=> download時にtimeoutしてしまう
+      - { name: xtrafinder }
+    app_store: # メモなので直接は処理されません
+      - Alfred
+      - Cyberduck
+      - Dash
+      - Evernote
+      - MiniUsage
+      - Monosnap
+      - Pushbullet
+      - Sip
+      - Skitch
+      - Slack
+      - Sunrise
+    others: # メモなので直接は処理されません
+      - Cocos2d-x
+      - Sourcetree # cask
+      - Unity # cask
+      - Synergy
+      - Xamarin
+
+  tasks:
+    - name: ユーザ名の取得
+      action: shell whoami
+      register: whoami
+
+    - name: homebrew tap追加
+      homebrew_tap: tap={{item}} state=present
+      with_items: homebrew_taps
+
+    - name: homebrew update
+      homebrew: update_homebrew=yes
+
+    # brew
+    - name: brewパッケージのインストール
+      homebrew: name={{item.name}} state={{item.state|default('latest')}} install_options={{item.install_options|default()}}
+      with_items: homebrew_packages
+      register: brew_result
+    - name: brewパッケージの情報保存先ディレクトリの作成
+      file: path=brew_info state=directory
+    - name: brewパッケージの情報保存
+      shell: brew info {{item}} > brew_info/{{item}}
+      with_items: brew_result.results | selectattr('changed') | map(attribute='item') | map(attribute='name') | list
+
+    # cask
+    - name: homebrew-caskのインストール
+      homebrew: name=brew-cask state=latest
+    - name: caskパッケージをインストール
+      homebrew_cask: name={{item.name}} state={{item.state|default('installed')}}
+      with_items: homebrew_cask_packages
+      register: cask_result
+    - name: caskパッケージの情報保存先ディレクトリの作成
+      file: path=cask_info state=directory
+    - name: caskパッケージの情報を保存
+      shell: brew cask info {{item}} > cask_info/{{item}}
+      with_items: cask_result.results | selectattr('changed') | map(attribute='item') | map(attribute='name') | list
+
+    # zsh化
+    - name: シェルの変更
+      sudo: yes
+    #  user: name=${whoami.stdout} shell=/bin/zsh #=> できなかったので、直接shellコマンド
+      shell: chsh -s /bin/zsh
+
+    # Pretzo
