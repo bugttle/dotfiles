@@ -3,6 +3,7 @@
 .DS_Store
 .AppleDouble
 .LSOverride
+*.swp
 
 # Icon must end with two \r
 Icon
@@ -24,3 +25,8 @@ Temporary Items
 # ssh
 .ssh/*/id_rsa*
 .ssh/known_hosts
+
+# cargo
+.cargo/.crates.toml
+.cargo/bin
+.cargo/registry
