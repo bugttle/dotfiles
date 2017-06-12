@@ -38,6 +38,7 @@
       - { name: crashlytics }
       - { name: clipmenu }
       - { name: firefox }
+      - { name: fonts }
       - { name: gimp }
       - { name: google-chrome }
       - { name: google-japanese-ime }
