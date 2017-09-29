@@ -55,6 +55,11 @@ export PATH=/usr/local/opt/coreutils/libexec/gnubin:${PATH}
 export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}
 
 # ============================================================
+# Tools
+# ============================================================
+export PATH=/Developer/Tools/bin:${PATH}
+
+# ============================================================
 # Android
 # ============================================================
 export ANDROID_SDK_ROOT=/Developer/Android/sdk
@@ -123,3 +128,14 @@ fi
 # ================================================================================
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
+
+# ================================================================================
+# Emscripten
+# ================================================================================
+# Adding directories to PATH:
+export PATH=${PATH}:/Developer/emsdk_portable/clang/e1.35.0_64bit
+export PATH=${PATH}:/Developer/emsdk_portable/node/4.1.1_64bit/bin
+export PATH=${PATH}:/Developer/emsdk_portable/emscripten/1.35.0
+
+# Setting environment variables:
+export EMSCRIPTEN=/Developer/emsdk_portable/emscripten/1.35.0
