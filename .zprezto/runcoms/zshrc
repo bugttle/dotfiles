@@ -5,6 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+PATH=/usr/local/bin:$PATH
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -88,6 +90,11 @@ export PATH="/usr/local/heroku/bin:${PATH}"
 # Ruby
 # ============================================================
 [ -s `brew --prefix`/bin/rbenv ] && eval "$(rbenv init - zsh)"
+
+# ============================================================
+# Python
+# ============================================================
+PATH=$(pyenv root)/shims:$PATH
 
 # ============================================================
 # Go
