@@ -28,7 +28,7 @@ export EDITOR=vim
 export LSCOLORS=gxfxcxdxbxegedabagacad
 export LS_COLORS="di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-alias ls="ls -GF --color"
+#alias ls="ls -GF --color"
 
 # emacs 風キーバインドにする
 bindkey -e
@@ -57,29 +57,25 @@ export PATH=/usr/local/opt/coreutils/libexec/gnubin:${PATH}
 export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}
 
 # ============================================================
-# Tools
-# ============================================================
-export PATH=/Developer/Tools/bin:${PATH}
-
-# ============================================================
 # Android
 # ============================================================
-export ANDROID_SDK_ROOT=/Developer/Android/sdk
+export ANDROID_ROOT=~/Library/Android
+export ANDROID_SDK_ROOT=${ANDROID_ROOT}/sdk
 export ANDROID_HOME=${ANDROID_SDK_ROOT}
-export NDK_ROOT=/Developer/Android/ndk/android-ndk-r9d
-export ANDROID_PLATFORM_TOOLS=/Developer/Android/sdk/platform-tools
-export ANDROID_TOOLS=/Developer/Android/sdk/tools
-export ANDROID_BUILD_TOOLS=/Developer/Android/sdk/build-tools/19.1.0/
-export PATH=$PATH:${ANDROID_SDK_ROOT}:${NDK_ROOT}:${ANDROID_PLATFORM_TOOLS}:${ANDROID_TOOLS}:${ANDROID_BUILD_TOOLS}
+export NDK_ROOT=${ANDROID_ROOT}/ndk
+export ANDROID_PLATFORM_TOOLS=${ANDROID_SDK_ROOT}/platform-tools
+export ANDROID_TOOLS=${ANDROID_SDK_ROOT}/tools
+##export ANDROID_BUILD_TOOLS=/Developer/Android/sdk/build-tools/19.1.0/
+export PATH=$PATH:${ANDROID_SDK_ROOT}:${NDK_ROOT}:${ANDROID_PLATFORM_TOOLS}:${ANDROID_TOOLS}
 
 # ============================================================
 # Cocos2d-x
 # ============================================================
-export ANT_ROOT=/usr/local/Cellar/ant/1.9.4/libexec/bin
-export COCOS_X_ROOT=/Developer/Cocos2d-x/cocos2d-x-3.4
-export COCOS_CONSOLE_ROOT=${COCOS_X_ROOT}/tools/cocos2d-console/bin
-export COCOS_TEMPLATES_ROOT=${COCOS_X_ROOT}/templates
-export PATH=$PATH:${ANT_ROOT}:${COCOS_CONSOLE_ROOT}:${COCOS_X_ROOT}:${COCOS_TEMPLATES_ROOT}
+#export ANT_ROOT=/usr/local/Cellar/ant/1.9.4/libexec/bin
+#export COCOS_X_ROOT=/Developer/Cocos2d-x/cocos2d-x-3.4
+#export COCOS_CONSOLE_ROOT=${COCOS_X_ROOT}/tools/cocos2d-console/bin
+#export COCOS_TEMPLATES_ROOT=${COCOS_X_ROOT}/templates
+#export PATH=$PATH:${ANT_ROOT}:${COCOS_CONSOLE_ROOT}:${COCOS_X_ROOT}:${COCOS_TEMPLATES_ROOT}
 
 # ============================================================
 # Heroku Toolbelt
@@ -87,14 +83,24 @@ export PATH=$PATH:${ANT_ROOT}:${COCOS_CONSOLE_ROOT}:${COCOS_X_ROOT}:${COCOS_TEMP
 export PATH="/usr/local/heroku/bin:${PATH}"
 
 # ============================================================
-# Ruby
-# ============================================================
-[ -s `brew --prefix`/bin/rbenv ] && eval "$(rbenv init - zsh)"
-
-# ============================================================
 # Python
 # ============================================================
+# pyenv
 PATH=$(pyenv root)/shims:$PATH
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if [ -d ~/.pyenv ]; then
+  eval "$(pyenv init -)"
+fi
+
+# ============================================================
+# Ruby
+# ============================================================
+# rbenv
+export PATH=${PATH}:${HOME}/.rbenv/bin
+if [ -d ~/.rbenv ]; then
+  eval "$(rbenv init -)"
+fi
 
 # ============================================================
 # Go
@@ -103,13 +109,18 @@ export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=${HOME}
 export PATH=${PATH}:${GOROOT}/bin:${GOPATH}/bin
 # IntelliJ
-launchctl setenv GOROOT ${GOROOT}
-launchctl setenv GOPATH ${GOPATH}
+#launchctl setenv GOROOT ${GOROOT}
+#launchctl setenv GOPATH ${GOPATH}
 
 # ============================================================
 # Scala
 # ============================================================
-export PATH=${PATH}:/Developer/Scala/scala/bin
+#export PATH=${PATH}:/Developer/Scala/scala/bin
+
+# ================================================================================
+# Flutter
+# ================================================================================
+export PATH=~/Library/flutter/bin:$PATH
 
 # ============================================================
 # peco
