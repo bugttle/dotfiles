@@ -19,7 +19,10 @@ $ brew doctor
 
 ## zsh
 ```
-$ sudo chsh -s /bin/zsh
+$ brew install --without-etcdir zsh
+$ sudo vim /etc/shells
++/usr/local/bin/zsh
+$ chsh -s /usr/local/bin/zsh
 ```
 
 # Deploy
