@@ -27,7 +27,7 @@ $ chsh -s /usr/local/bin/zsh
 
 # Deploy
 ```
-$ make homebrew-install
+$ make install-homebrew
 $ make list #=> show dotfiles
 $ make deploy
 ```
