@@ -6,8 +6,12 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
-[user]
-	name = bugttle
-	email = bugttle@gmail.com
 [commit]
 	template = ~/.stCommitMsg
+
+[includeIf "gitdir:~/Projects/Work/"]
+  path = ~/.gitconfigs/.gitconfig-work
+
+[includeIf "gitdir:~/Projects/Mine/"]
+  path = ~/.gitconfigs/.gitconfig-individual
+
